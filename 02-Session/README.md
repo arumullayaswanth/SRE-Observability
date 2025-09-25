@@ -109,7 +109,7 @@ Integration Key
 
 Integration URL  
 https://events.pagerduty.com/generic/2010-04-15/create_event.json
-
+````
 ---
 
 ## 🔹 1. Connect to your grefana-prometheus EC2
