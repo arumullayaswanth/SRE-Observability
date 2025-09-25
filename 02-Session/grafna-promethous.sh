@@ -117,7 +117,7 @@ groups:
           description: "Detected unauthorized (401/403) requests in the past 5 minutes."
 EOF
 
-# ============ 6. PagerDuty Integration ============
+# ============ 6. PagerDuty Integration ============ {  - routing_key: "661813e1777d480ed0606acb28e5bd81"     # Replace your Integration Key }
 sudo tee /etc/alertmanager/alertmanager.yml >/dev/null <<'EOF'
 route:
   receiver: pagerduty
@@ -128,7 +128,7 @@ route:
 receivers:
   - name: pagerduty
     pagerduty_configs:
-      - routing_key: "661813e1777d480ed0606acb28e5bd81"     // Replace your Integration Key
+      - routing_key: "661813e1777d480ed0606acb28e5bd81"     
         severity: "critical"
 EOF
 
@@ -161,7 +161,7 @@ EOF
 sudo systemctl daemon-reexec
 sudo systemctl enable --now node_exporter
 
-# ============ 8. Prometheus Config ============
+# ============ 8. Prometheus Config ============ { values: ["node-server"]        // See I'm using the target server is a {node-server} name  Make sure if you using my code you can also use the same name}
 sudo tee /etc/prometheus/prometheus.yml >/dev/null <<'EOF'
 global:
   scrape_interval: 15s
@@ -197,7 +197,7 @@ scrape_configs:
         port: 9100
         filters:
           - name: "tag:Name"
-            values: ["node-server"]        // See I'm using the target server is a {node-server} name  Make sure if you using my code you can also use the same name
+            values: ["node-server"]       
     relabel_configs:
       - source_labels: [__meta_ec2_private_ip]
         regex: (.*)
