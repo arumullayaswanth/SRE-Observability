@@ -218,9 +218,48 @@ sudo apt-get install stress-ng -y  # Ubuntu/Debian
 stress-ng --cpu 2 --timeout 300
 ```
 
+## 🔹 1. Add CloudWatch as Data Source
+
+1. In Grafana UI → **Configuration → Data Sources → Add data source**
+2. Select **CloudWatch**
+3. Set **Region** → `us-east-1`
+4. Click **Save & Test** → it should say **Data source is working**
+
+### Query Example for CloudWatch:
+
+```sql
+SELECT AVG(CPUUtilization) FROM "AWS/EC2"
 ```
 
-If you want, I can also combine **Grafana, Prometheus, and node-server steps** into a single clean `.md` guide for easier copy-pasting.  
+* This will show average CPU utilization for your EC2 instances.
 
-Do you want me to do that?
+---
+
+## 🔹 2. Add Prometheus as Data Source
+
+1. Grafana UI → **Configuration → Data Sources → Add data source**
+2. Select **Prometheus**
+3. URL → `http://localhost:9090` (or wherever Prometheus is running)
+4. Click **Save & Test** → it should say **Data source is working**
+
+### Query Example for Prometheus:
+
 ```
+node_cpu_seconds_total{cpu="1"}
+```
+
+* This will show CPU usage for CPU core 1 on the node you’re monitoring.
+
+---
+
+## 🔹 3. Create a Custom Dashboard
+
+1. Grafana → **Dashboards → New Dashboard → Add Panel**
+2. Select **CloudWatch** as data source → use the CPUUtilization query
+3. Add another panel → select **Prometheus** → use the `node_cpu_seconds_total` query
+4. Apply → you now have a **combined dashboard** showing both CloudWatch and Prometheus metrics
+
+---
+
+
+
