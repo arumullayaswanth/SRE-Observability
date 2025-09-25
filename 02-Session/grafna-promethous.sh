@@ -128,7 +128,7 @@ route:
 receivers:
   - name: pagerduty
     pagerduty_configs:
-      - routing_key: "50d89a73e5e4490cc00564f8767e9a71"     #ff
+      - routing_key: "661813e1777d480ed0606acb28e5bd81"     // Replace your Integration Key
         severity: "critical"
 EOF
 
@@ -197,7 +197,7 @@ scrape_configs:
         port: 9100
         filters:
           - name: "tag:Name"
-            values: ["node-server"]
+            values: ["node-server"]        // See I'm using the target server is a {node-server} name  Make sure if you using my code you can also use the same name
     relabel_configs:
       - source_labels: [__meta_ec2_private_ip]
         regex: (.*)
