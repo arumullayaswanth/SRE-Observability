@@ -1,5 +1,7 @@
 # Site Reliability Engineering (SRE) Introduction
 
+![Diagram](./01-Session/Introduction-to-Observability.png)
+
 ## What is SRE?
 Site Reliability Engineering (SRE) is a discipline that applies software engineering practices to infrastructure and operations problems. Its goal is to create scalable and highly reliable systems.
 
